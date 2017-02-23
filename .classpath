@@ -22,5 +22,6 @@
 	<classpathentry kind="lib" path="lib/lwjgl-stb.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl-stb-javadoc.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl-stb-natives-windows.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dylanbrophy/Desktop/java_workspace/PhysicsSim/lib/lwjgl_util.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

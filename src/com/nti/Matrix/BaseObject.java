@@ -4,15 +4,13 @@ import javax.vecmath.Matrix4f;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
-import com.bulletphysics.collision.shapes.BoxShape;
-import com.bulletphysics.collision.shapes.CollisionShape;
 import com.bulletphysics.dynamics.RigidBody;
 import com.bulletphysics.dynamics.RigidBodyConstructionInfo;
 import com.bulletphysics.linearmath.DefaultMotionState;
 import com.bulletphysics.linearmath.MotionState;
 import com.bulletphysics.linearmath.Transform;
 
-public class BaseObject extends RigidBody {
+public abstract class BaseObject extends RigidBody {
 	float mass=1.0f; 	// mass in grams
 	float density=0.7f; // density in g/m3
 	float v;			// volume in m3
@@ -22,11 +20,7 @@ public class BaseObject extends RigidBody {
 	boolean hasgravity=false;
 	long dt=0;
 	// draw cube
-	public void Render(){
-		Transform x = new Transform();
-		this.getMotionState().getWorldTransform(x);
-		Renderer.Cube(x,len);
-	}
+	public abstract void Render();
 	public void Update(){
 		if(hasgravity)
 			DoGravTick();
@@ -50,7 +44,6 @@ public class BaseObject extends RigidBody {
 				i.getLinearVelocity(tmp);
 				tmp.add(new Vector3f(pos.x*force_b,pos.y*force_b,pos.z*force_b));
 
-				System.out.println(tmp);
 				i.setLinearVelocity(tmp);
 			}
 		}
@@ -64,13 +57,7 @@ public class BaseObject extends RigidBody {
 		hasgravity=false;
 	}
 	// for recalculating object properties after density/mass/composition change
-	public void Recalc(){
-		density=composition.getDensity();
-		v=mass/density;
-		len=(float)Math.cbrt(v);
-		this.setCollisionShape(new BoxShape(new Vector3f(len,len,len)));
-		dt=System.currentTimeMillis();
-	}
+	public abstract void Recalc();
 	
 	public BaseObject(float mass, MotionState motionState) {
 		super(Math.abs(mass), motionState,null);

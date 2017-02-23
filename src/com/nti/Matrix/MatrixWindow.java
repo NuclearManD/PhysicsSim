@@ -93,6 +93,7 @@ public class MatrixWindow {
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glDepthFunc(GL11.GL_LEQUAL);
 	}
+	// Thankyou Edward for this beautiful function!
 	void perspective_horizontal(float fov, float aspect, float front, float back)
 	{
 	    fov = fov*0.0174532925199432957692369076849f;                      // transform fov from degrees to radians

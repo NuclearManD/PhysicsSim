@@ -4,13 +4,14 @@ import java.nio.FloatBuffer;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
-
+import org.lwjgl.opengl.GLUtil;
+import org.lwjgl.opengl.GLX;
+import org.lwjgl.util.glu.Sphere;
 import com.bulletphysics.linearmath.Transform;
 
 public class Renderer {
 
 	public static void Cube(Transform x,float size) {
-		// TODO Auto-generated constructor stub
 		// These can be pre-allocated.
 		float[] matrix = new float[16];
 		FloatBuffer transformBuffer = BufferUtils.createFloatBuffer(16);
@@ -80,5 +81,21 @@ public class Renderer {
         GL11.glEnd();                        // Done Drawing The Quad
         GL11.glPopMatrix(); // Restore the saved transformation
 	}
-	
+	public static void Sphere(Transform x, float size){
+		// These can be pre-allocated.
+		float[] matrix = new float[16];
+		FloatBuffer transformBuffer = BufferUtils.createFloatBuffer(16);
+		x.getOpenGLMatrix(matrix);
+
+		// Put the transformation matrix into a FloatBuffer.
+		transformBuffer.clear();
+		transformBuffer.put(matrix);
+		transformBuffer.flip();
+		//size=size/2;
+		GL11.glPushMatrix(); // Save the current OpenGL transformation
+		GL11.glMultMatrixf(transformBuffer); // Apply the object transformation
+		Sphere s = new Sphere();
+		s.draw(size, 16, 16);
+		GL11.glPopMatrix();
+	}
 }
