@@ -39,6 +39,11 @@ $RECYCLE.BIN/
 .Trashes
 .VolumeIcon.icns
 
+# eclipse crap
+#.settings
+bin
+lib
+
 # Directories potentially created on remote AFP share
 .AppleDB
 .AppleDesktop
