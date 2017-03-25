@@ -13,9 +13,10 @@ public class CubeObject extends BaseObject {
 		len=(float)Math.cbrt(v);
 		this.setCollisionShape(new BoxShape(new Vector3f(len,len,len)));
 		dt=System.currentTimeMillis();
+		color=composition.GetColor();
 	}
 	public void Render(){
-		Renderer.Cube(worldTransform,len);
+		Renderer.Cube(worldTransform,len,color);
 	}
 	public CubeObject(float mass, MotionState motionState) {
 		super(mass, motionState);

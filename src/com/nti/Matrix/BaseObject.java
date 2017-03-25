@@ -19,6 +19,7 @@ public abstract class BaseObject extends RigidBody {
 	World env;
 	boolean hasgravity=false;
 	long dt=0;
+	Vector3f color;
 	// draw cube
 	public abstract void Render();
 	public void Update(){

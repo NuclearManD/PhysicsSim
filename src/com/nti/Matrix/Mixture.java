@@ -2,6 +2,8 @@ package com.nti.Matrix;
 
 import java.util.Random;
 
+import javax.vecmath.Vector3f;
+
 public class Mixture {
 	float[] components;
 	public Mixture(){
@@ -16,11 +18,24 @@ public class Mixture {
 	public float getDensity() {
 		// TODO Auto-generated method stub
 		float out=0;
+		float total=0;
 		// i represents atomic #
 		for(int i=1;i<33;i++){
 			out+=components[i-1]*2000*i/(Math.pow(1.1,i)+2*i);
+			total+=components[i-1];
 		}
-		return out;
+		return out/total;
+	}
+	public Vector3f GetColor(){
+		Vector3f tmp=new Vector3f(0,0,0);
+		for(int i=0;i<32;i++){
+			byte x=(byte) ((i+1)%8);
+			tmp.x+=components[i]*(x&1);
+			tmp.y+=components[i]*((x&2)>>1);
+			tmp.z+=components[i]*((x&4)>>2);
+		}
+		tmp.normalize();
+		return tmp;
 	}
 	// Helper functions
 

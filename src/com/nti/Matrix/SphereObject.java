@@ -7,10 +7,9 @@ import com.bulletphysics.collision.shapes.SphereShape;
 import com.bulletphysics.linearmath.MotionState;
 
 public class SphereObject extends BaseObject {
-
 	@Override
 	public void Render(){
-		Renderer.Sphere(worldTransform, len);
+		Renderer.Sphere(worldTransform, len, color);
 	}
 	@Override
 	public void Recalc(){
@@ -19,6 +18,7 @@ public class SphereObject extends BaseObject {
 		len=(float)Math.cbrt(3*v/(4*Math.PI));
 		this.setCollisionShape(new SphereShape(len));
 		dt=System.currentTimeMillis();
+		color=composition.GetColor();
 	}
 	public SphereObject(float mass, MotionState motionState) {
 		super(mass, motionState);
