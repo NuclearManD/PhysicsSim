@@ -41,7 +41,7 @@ public class World {
 		if(dt<1)		// prevent simulations of less than one ms
 			return;
 		lt=System.currentTimeMillis();
-		env.stepSimulation(((float)dt)/1000.0f,30);
+		env.stepSimulation(((float)dt)/1000.0f,10);
 		for(BaseObject i : objects){
 			i.Update();
 		}

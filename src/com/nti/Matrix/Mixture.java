@@ -15,13 +15,13 @@ public class Mixture {
 		}
 		components[rand.nextInt(32)]=1; // Made of random element
 	}
-	public float getDensity() {
+	public float getDensity() {  // in g/m3
 		// TODO Auto-generated method stub
 		float out=0;
 		float total=0;
 		// i represents atomic #
 		for(int i=1;i<33;i++){
-			out+=components[i-1]*2000*i/(Math.pow(1.1,i)+2*i);
+			out+=components[i-1]*(100000*i)/(2*Math.abs(i%8-4)+2);
 			total+=components[i-1];
 		}
 		return out/total;

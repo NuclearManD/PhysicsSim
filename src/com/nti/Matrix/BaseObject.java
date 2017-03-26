@@ -37,7 +37,7 @@ public abstract class BaseObject extends RigidBody {
 				pos.sub(i.worldTransform.origin);
 				pos.normalize();
 				float k=(float)Math.sqrt(pos.x*pos.x+pos.y*pos.y+pos.z*pos.z);
-				float force=6.67f*mass*i.mass*(System.currentTimeMillis()-dt)/((float)Math.pow(10, 11)*(k*k)*1000f);
+				float force=(float) (mass*i.mass*(System.currentTimeMillis()-dt)*Constants.bigg/(k*k));
 				float force_a=-force/mass,force_b=force/i.mass;
 				getLinearVelocity(tmp);
 				tmp.add(new Vector3f(pos.x*force_a,pos.y*force_a,pos.z*force_a));
