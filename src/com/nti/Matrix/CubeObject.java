@@ -8,12 +8,13 @@ import com.bulletphysics.linearmath.MotionState;
 
 public class CubeObject extends BaseObject {
 	public void Recalc(){
-		density=composition.getDensity();
+		density=100000;
 		v=mass/density;
 		len=(float)Math.cbrt(v);
 		this.setCollisionShape(new BoxShape(new Vector3f(len,len,len)));
 		dt=System.currentTimeMillis();
-		color=composition.GetColor();
+		color=new Vector3f((float)Math.random(),(float)Math.random(),(float)Math.random());
+		color.normalize();
 	}
 	public void Render(){
 		Renderer.Cube(worldTransform,len,color);

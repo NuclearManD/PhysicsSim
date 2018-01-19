@@ -15,7 +15,6 @@ public abstract class BaseObject extends RigidBody {
 	float density=0.7f; // density in g/m3
 	float v;			// volume in m3
 	public float len;	// cube side length
-	Mixture composition;// object composition
 	World env;
 	boolean hasgravity=false;
 	long dt=0;
@@ -63,46 +62,34 @@ public abstract class BaseObject extends RigidBody {
 	public BaseObject(float mass, MotionState motionState) {
 		super(Math.abs(mass), motionState,null);
 		this.mass=mass;
-		composition=new Mixture();
 		Recalc();
-		// TODO Auto-generated constructor stub
 	}
 
 	public BaseObject(float mass, MotionState motionState, Vector3f localInertia) {
 		super(Math.abs(mass), motionState, null, localInertia);
 		this.mass=mass;
-		composition=new Mixture();
 		Recalc();
-		// TODO Auto-generated constructor stub
 	}
 	public BaseObject(float mass, Vector3f pos, Quat4f rot, Vector3f localInertia) {
 		super(Math.abs(mass),new DefaultMotionState(new Transform(new Matrix4f(rot, pos, 1.0f))), null, localInertia);
 		this.mass=mass;
-		composition=new Mixture();
 		Recalc();
-		// TODO Auto-generated constructor stub
 	}
 	public BaseObject(float mass, Vector3f pos, Quat4f rot) {
 		super(Math.abs(mass), new DefaultMotionState(new Transform(new Matrix4f(rot, pos, 1.0f))), null);
 		this.mass=mass;
-		composition=new Mixture();
 		Recalc();
-		// TODO Auto-generated constructor stub
 	}
 	public BaseObject(float mass, Vector3f pos) {
 		super(Math.abs(mass), new DefaultMotionState(new Transform(new Matrix4f(new Quat4f(0, 0, 0, 1), pos, 1.0f))), null);
 		this.mass=mass;
-		composition=new Mixture();
 		Recalc();
-		// TODO Auto-generated constructor stub
 	}
 	@Deprecated
 	public BaseObject(RigidBodyConstructionInfo constructionInfo) {
 		super(constructionInfo);
 		this.mass=constructionInfo.mass;
-		composition=new Mixture();
 		Recalc();
-		// TODO Auto-generated constructor stub
 	}
 
 }
