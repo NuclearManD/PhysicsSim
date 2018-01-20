@@ -46,7 +46,7 @@ public /*abstract*/ class Particle extends CubeObject {
 		//System.out.println(color.toString());
 	}
 	public void Recalc(){
-		v=1.25e-4f;
+		v=.125f;
 		density=mass/v;
 		len=(float)Math.cbrt(v);
 		this.setCollisionShape(new BoxShape(new Vector3f(len,len,len)));

@@ -32,7 +32,7 @@ public class QuantumEye extends Particle {
 		ldy=y;
         camera.yaw += dx * mouseSensitivity * delta;
         camera.pitch -= -dy * mouseSensitivity * delta;
-        camera.yaw=Math.max(-maxLook, Math.min(maxLook, camera.yaw));
+        //camera.pitch=Math.max(-maxLook, Math.min(maxLook, camera.yaw));
 	}
 	public void Render(){}// render nothing
 	public void translate(Vector3f t){

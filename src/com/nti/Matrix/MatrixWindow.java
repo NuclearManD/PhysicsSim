@@ -20,12 +20,12 @@ import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
 import static org.lwjgl.glfw.GLFW.glfwSwapInterval;
 import static org.lwjgl.glfw.GLFW.glfwWindowHint;
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
-import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.glClear;
-import static org.lwjgl.opengl.GL11.glClearColor;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
+import javax.vecmath.Vector3f;
+
+import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
@@ -83,7 +83,13 @@ public class MatrixWindow {
 		GL.createCapabilities();
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-		//*
+		glShadeModel(GL_SMOOTH);
+		glMaterialf(GL_FRONT, GL_SHININESS, 50.0f);					// sets shininess
+		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); 
+		glEnable(GL_LIGHTING);										// enables lighting
+		glEnable(GL_LIGHT0);
+		glEnable(GL_COLOR_MATERIAL);								// enables opengl to use glColor3f to define material color
+		glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);	
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
 		perspective_horizontal(60.0f /* fov of 85 degrees */, (float)width/height, 0.01f, 10000.0f);

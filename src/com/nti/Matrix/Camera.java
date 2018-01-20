@@ -21,6 +21,6 @@ public class Camera {
 		GL11.glLoadIdentity();
         GL11.glRotatef(pitch, 1, 0, 0);
         GL11.glRotatef(yaw, 0, 1, 0);
-        GL11.glTranslatef(-pos.x, -pos.y, -pos.z);
+        GL11.glTranslatef(pos.x, pos.y, pos.z);
 	}
 }
