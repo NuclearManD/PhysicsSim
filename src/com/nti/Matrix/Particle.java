@@ -9,18 +9,23 @@ public /*abstract*/ class Particle extends CubeObject {
 	private float heat=100;// Joules
 	private float qE=1;  // Joules
 	protected float[] color_projection={.5f,.5f,.5f};
+	protected float delta=0;
+	private long timeLast;
 	@Deprecated
 	public Particle(float mass, Vector3f pos, Quat4f rot, Vector3f localInertia) {
 		super(mass, pos, rot, localInertia);
+		timeLast=System.currentTimeMillis();
 	}
 	public Particle(float mass, Vector3f v) {
 		super(mass,v);
 		this.mass=mass;
+		timeLast=System.currentTimeMillis();
 	}
 	public Particle(float mass, Vector3f v, float h) {
 		super(mass,v);
 		this.mass=mass;
 		heat=h;
+		timeLast=System.currentTimeMillis();
 	}
 	//public abstract void tick();
 	public void tick(){
@@ -28,6 +33,8 @@ public /*abstract*/ class Particle extends CubeObject {
 	}
 	public final void Update(){
 		tick();
+		delta=System.currentTimeMillis()-timeLast;
+		timeLast=System.currentTimeMillis();
 	}
 	private final void calcColor(){
 		if(color_projection==null){
