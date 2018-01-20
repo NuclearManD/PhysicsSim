@@ -47,7 +47,6 @@ public class World {
 		}
 	}
 	public void render() {
-		// TODO Auto-generated method stub
 		for(BaseObject i : objects){
 			i.Render();
 		}

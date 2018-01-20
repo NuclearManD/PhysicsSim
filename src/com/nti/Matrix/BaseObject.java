@@ -11,14 +11,14 @@ import com.bulletphysics.linearmath.MotionState;
 import com.bulletphysics.linearmath.Transform;
 
 public abstract class BaseObject extends RigidBody {
-	float mass=1.0f; 	// mass in grams
-	float density=0.7f; // density in g/m3
-	float v;			// volume in m3
+	protected float mass=1.0f; 	// mass in grams
+	protected float density=0.7f; // density in g/m3
+	protected float v;			// volume in m3
 	public float len;	// cube side length
-	World env;
-	boolean hasgravity=false;
-	long dt=0;
-	Vector3f color;
+	protected World env;
+	protected boolean hasgravity=false;
+	protected long dt=0;
+	protected Vector3f color;
 	// draw cube
 	public abstract void Render();
 	public void Update(){

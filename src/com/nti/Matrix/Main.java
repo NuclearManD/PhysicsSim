@@ -17,40 +17,40 @@ public class Main {
 		env=new World();
 		window=new MatrixWindow();
 		long lt=System.currentTimeMillis();
-		BaseObject m=new CubeObject(1.2776e10f, new Vector3f(0,0,0));
-		m.AddGravity(env);
-		m.setAngularVelocity(new Vector3f(-1f,-1f,1f));
-		m.AddGravity(env);
-		m.Recalc();
-		System.out.println(m.len);
-		env.addObject(m);
-		BaseObject r=new CubeObject(7000000000f, new Vector3f(-355,-110,0));
-		r.setLinearVelocity(new Vector3f(-5,20.02f,0));
-		r.Recalc();
-		env.addObject(r);
-		System.out.println("...");
-		for(int i=0;i<1000;i++){
-			r=new CubeObject(700000, new Vector3f(-350-((i/20))*6f,-100-(i%23)*6f,-100+(i%11)*6f));
-			r.setAngularVelocity(new Vector3f(1,0.1f,2));
-			r.setLinearVelocity(new Vector3f(-5+i%7,0.04f*(i+1),i%3-1));
-			r.Recalc();
-			env.addObject(r);
+		Particle m=null;
+		Particle last=null;
+		Particle middle=null;
+		for(int i=0;i<10;i++){
+			m=new Particle(1f, new Vector3f(0,i*.12f,0));
+			m.setAngularVelocity(new Vector3f(0.1f,0.1f-i/10f,(float)Math.pow(-1,i)*i/10f));
+			m.setFriction(0);
+			m.applyCentralImpulse(new Vector3f(0.1f,-0.3f+i%3/6f,0.6f-i%2/5f));
+			m.Recalc();
+			//m.color_projection[1]=(float)i/30.0f;
+			if(i==5){
+				middle=m;
+				m.applyCentralImpulse(new Vector3f(-0.1f,1,0));
+			}
+			if(last!=null)
+				m.addHeat(last, i-5);
+			last=m;
+			env.addObject(m);
 		}
-		System.out.println("...");
-		Transform tmp=new Transform();
+		QuantumEye Eye=new QuantumEye(.5f,new Vector3f(0,0,0));
+		Eye.Recalc();
+		
+		env.addObject(Eye);
+		
 		Transform wt=new Transform();
-		Camera cam=new Camera(tmp);
-		tmp.setRotation(new Quat4f(0,0,0,0));
 		float rot=0;
 		while(!window.doExit()){
+			middle.getWorldTransform(wt);
+			wt.origin.y+=(float) (3*Math.sin(0.0174533*rot));
+			wt.origin.z+=(float) (3*Math.cos(0.0174533*rot));
+			Eye.setWorldTransform(wt);
+			Eye.camera.pitch=rot;
 			window.preupdate();	
 			env.update();
-			m.getWorldTransform(wt);
-			tmp.origin.x=wt.origin.x;
-			tmp.origin.y=wt.origin.y+(float) (1000f*Math.sin(0.0174533*rot));
-			tmp.origin.z=wt.origin.z+(float) (1000f*Math.cos(0.0174533*rot));
-			cam.pitch=rot;
-			cam.Render();
 			env.render();
 			//Renderer.Plane(g.getMotionState().getWorldTransform(tmpt), 10);
 			//Renderer.Plane(w1.getMotionState().getWorldTransform(tmpt), 10);
